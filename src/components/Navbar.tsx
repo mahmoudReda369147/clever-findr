@@ -27,7 +27,7 @@ const Navbar = () => {
             <span className="text-xl font-bold gradient-text">ShopAI</span>
           </Link>
 
-          {/* Navigation Links */}
+          {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-1">
             <Link to="/">
               <Button
@@ -37,8 +37,8 @@ const Navbar = () => {
                   isActive("/") ? "bg-primary/10 text-primary" : ""
                 }`}
               >
-                <ShoppingBag className="h-4 w-4 mr-2" />
-                Search
+                <ShoppingBag className="h-4 w-4 md:mr-2" />
+                <span className="hidden lg:inline">Search</span>
               </Button>
             </Link>
             <Link to="/chat">
@@ -49,8 +49,8 @@ const Navbar = () => {
                   isActive("/chat") ? "bg-primary/10 text-primary" : ""
                 }`}
               >
-                <Sparkles className="h-4 w-4 mr-2" />
-                AI Chat
+                <Sparkles className="h-4 w-4 md:mr-2" />
+                <span className="hidden lg:inline">AI Chat</span>
               </Button>
             </Link>
             <Link to="/favorites">
@@ -61,16 +61,16 @@ const Navbar = () => {
                   isActive("/favorites") ? "bg-primary/10 text-primary" : ""
                 }`}
               >
-                <Heart className="h-4 w-4 mr-2" />
-                Favorites
+                <Heart className="h-4 w-4 md:mr-2" />
+                <span className="hidden lg:inline">Favorites</span>
               </Button>
             </Link>
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5" />
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Button variant="ghost" size="icon" className="relative h-9 w-9 sm:h-10 sm:w-10">
+              <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
               <span className="absolute top-1 right-1 h-2 w-2 bg-destructive rounded-full animate-pulse" />
             </Button>
             
@@ -78,21 +78,21 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="hover-glow"
+              className="hover-glow h-9 w-9 sm:h-10 sm:w-10"
             >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {isDark ? <Sun className="h-4 w-4 sm:h-5 sm:w-5" /> : <Moon className="h-4 w-4 sm:h-5 sm:w-5" />}
             </Button>
 
-            <Link to="/settings">
+            <Link to="/settings" className="hidden sm:inline-flex">
               <Button variant="ghost" size="icon">
                 <Settings className="h-5 w-5" />
               </Button>
             </Link>
 
             <Link to="/auth">
-              <Button variant="default" size="sm" className="hover-glow">
-                <User className="h-4 w-4 mr-2" />
-                Sign In
+              <Button variant="default" size="sm" className="hover-glow h-9 sm:h-10">
+                <User className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Sign In</span>
               </Button>
             </Link>
           </div>

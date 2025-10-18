@@ -10,11 +10,11 @@ import { Separator } from "@/components/ui/separator";
 const Settings = () => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">
           <span className="gradient-text">Settings</span>
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Manage your account preferences and app settings
         </p>
       </div>

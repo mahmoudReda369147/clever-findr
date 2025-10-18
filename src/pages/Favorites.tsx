@@ -51,30 +51,30 @@ const Favorites = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">
           Your <span className="gradient-text">Favorites</span>
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           {favorites.length} saved {favorites.length === 1 ? "product" : "products"}
         </p>
       </div>
 
       {favorites.length === 0 ? (
-        <Card className="glass text-center p-12">
+        <Card className="glass text-center p-8 sm:p-12">
           <div className="max-w-md mx-auto">
-            <div className="h-24 w-24 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-4">
-              <Star className="h-12 w-12 text-muted-foreground" />
+            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-4">
+              <Star className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground" />
             </div>
-            <h3 className="text-xl font-bold mb-2">No favorites yet</h3>
-            <p className="text-muted-foreground mb-4">
+            <h3 className="text-lg sm:text-xl font-bold mb-2">No favorites yet</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4">
               Start adding products to your favorites to track prices and never miss a deal!
             </p>
-            <Button>Browse Products</Button>
+            <Button className="text-sm sm:text-base">Browse Products</Button>
           </div>
         </Card>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {favorites.map((product, index) => {
             const priceChange = getPriceChange(product.currentPrice, product.previousPrice);
             return (
@@ -93,7 +93,7 @@ const Favorites = () => {
                     <div className="absolute top-2 right-2">
                       <Badge
                         variant={priceChange.isIncrease ? "destructive" : "default"}
-                        className="gap-1"
+                        className="gap-1 text-xs"
                       >
                         {priceChange.isIncrease ? (
                           <TrendingUp className="h-3 w-3" />
@@ -104,24 +104,24 @@ const Favorites = () => {
                       </Badge>
                     </div>
                   </div>
-                  <div className="p-4">
-                    <Badge className="mb-2">{product.source}</Badge>
-                    <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                  <div className="p-3 sm:p-4">
+                    <Badge className="mb-2 text-xs">{product.source}</Badge>
+                    <h3 className="text-sm sm:text-base font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                       {product.title}
                     </h3>
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium">{product.rating}</span>
+                        <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-yellow-400 text-yellow-400" />
+                        <span className="text-sm sm:text-base font-medium">{product.rating}</span>
                       </div>
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-xs sm:text-sm text-muted-foreground">
                         ({product.reviews.toLocaleString()})
                       </span>
                     </div>
                     <div className="space-y-1">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-bold">${product.currentPrice}</span>
-                        <span className="text-sm text-muted-foreground line-through">
+                        <span className="text-xl sm:text-2xl font-bold">${product.currentPrice}</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground line-through">
                           ${product.previousPrice}
                         </span>
                       </div>
@@ -131,13 +131,13 @@ const Favorites = () => {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="p-4 pt-0 flex gap-2">
-                  <Button className="flex-1 hover-glow">
-                    <ExternalLink className="h-4 w-4 mr-2" />
+                <CardFooter className="p-3 sm:p-4 pt-0 flex gap-2">
+                  <Button className="flex-1 hover-glow text-xs sm:text-sm h-9 sm:h-10">
+                    <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                     Buy Now
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-destructive hover:text-destructive-foreground">
-                    <Trash2 className="h-4 w-4" />
+                  <Button variant="outline" size="icon" className="hover:bg-destructive hover:text-destructive-foreground h-9 w-9 sm:h-10 sm:w-10">
+                    <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </CardFooter>
               </Card>

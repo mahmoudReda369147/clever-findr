@@ -100,22 +100,22 @@ const Results = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">
           Search results for <span className="gradient-text">"{query}"</span>
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Found {products.length} products across multiple stores
         </p>
       </div>
 
       {/* Filters and Controls */}
-      <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="flex gap-2 items-center flex-wrap">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+        <div className="flex gap-2 items-center flex-wrap w-full sm:w-auto">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="sm">
-                <SlidersHorizontal className="h-4 w-4 mr-2" />
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                <SlidersHorizontal className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Filters
               </Button>
             </SheetTrigger>
@@ -162,7 +162,7 @@ const Results = () => {
           </Sheet>
 
           <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[140px] sm:w-[180px] text-xs sm:text-sm h-9">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
@@ -175,20 +175,22 @@ const Results = () => {
           </Select>
         </div>
 
-        <div className="flex gap-1">
+        <div className="flex gap-1 ml-auto sm:ml-0">
           <Button
             variant={viewMode === "grid" ? "default" : "ghost"}
             size="icon"
             onClick={() => setViewMode("grid")}
+            className="h-9 w-9"
           >
-            <Grid3x3 className="h-4 w-4" />
+            <Grid3x3 className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
           <Button
             variant={viewMode === "list" ? "default" : "ghost"}
             size="icon"
             onClick={() => setViewMode("list")}
+            className="h-9 w-9"
           >
-            <List className="h-4 w-4" />
+            <List className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
         </div>
       </div>
@@ -197,7 +199,7 @@ const Results = () => {
       <div
         className={
           viewMode === "grid"
-            ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
             : "space-y-4"
         }
       >
@@ -215,7 +217,7 @@ const Results = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 {product.originalPrice && (
-                  <Badge className="absolute top-2 left-2 bg-destructive">
+                  <Badge className="absolute top-2 left-2 bg-destructive text-xs">
                     {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                   </Badge>
                 )}
@@ -227,46 +229,46 @@ const Results = () => {
                 <Button
                   size="icon"
                   variant="secondary"
-                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 sm:h-10 sm:w-10"
                 >
-                  <Heart className="h-4 w-4" />
+                  <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </div>
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Badge className={`${getSourceColor(product.source)} text-white`}>
+                  <Badge className={`${getSourceColor(product.source)} text-white text-xs`}>
                     {product.source}
                   </Badge>
                 </div>
-                <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                <h3 className="text-sm sm:text-base font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                   {product.title}
                 </h3>
                 <div className="flex items-center gap-2 mb-2">
                   <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{product.rating}</span>
+                    <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-sm sm:text-base font-medium">{product.rating}</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-xs sm:text-sm text-muted-foreground">
                     ({product.reviews.toLocaleString()})
                   </span>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold">${product.price}</span>
+                  <span className="text-xl sm:text-2xl font-bold">${product.price}</span>
                   {product.originalPrice && (
-                    <span className="text-sm text-muted-foreground line-through">
+                    <span className="text-xs sm:text-sm text-muted-foreground line-through">
                       ${product.originalPrice}
                     </span>
                   )}
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="p-4 pt-0 flex gap-2">
-              <Button className="flex-1 hover-glow" disabled={!product.inStock}>
-                <ExternalLink className="h-4 w-4 mr-2" />
+            <CardFooter className="p-3 sm:p-4 pt-0 flex gap-2">
+              <Button className="flex-1 hover-glow text-xs sm:text-sm h-9 sm:h-10" disabled={!product.inStock}>
+                <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Buy Now
               </Button>
-              <Button variant="outline" size="icon">
-                <Heart className="h-4 w-4" />
+              <Button variant="outline" size="icon" className="h-9 w-9 sm:h-10 sm:w-10">
+                <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </CardFooter>
           </Card>

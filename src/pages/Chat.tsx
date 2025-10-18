@@ -84,7 +84,7 @@ const Chat = () => {
   return (
     <div className="flex h-[calc(100vh-4rem)]">
       {/* Sidebar - Conversation History */}
-      <div className="hidden lg:block w-80 border-r border-border/50 glass">
+      <div className="hidden lg:block w-64 xl:w-80 border-r border-border/50 glass">
         <div className="p-4 border-b border-border/50">
           <h2 className="font-bold text-lg flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-primary" />
@@ -137,51 +137,52 @@ const Chat = () => {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Chat Header */}
-        <div className="p-4 border-b border-border/50 glass flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Sparkles className="h-5 w-5 text-white" />
+        <div className="p-3 sm:p-4 border-b border-border/50 glass flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
-            <div>
-              <h2 className="font-bold">AI Shopping Assistant</h2>
-              <p className="text-sm text-muted-foreground">Online • Ready to help</p>
+            <div className="min-w-0">
+              <h2 className="font-bold text-sm sm:text-base truncate">AI Shopping Assistant</h2>
+              <p className="text-xs sm:text-sm text-muted-foreground">Online • Ready to help</p>
             </div>
           </div>
-          <Button variant="outline" size="sm">
-            New Chat
+          <Button variant="outline" size="sm" className="flex-shrink-0 text-xs sm:text-sm">
+            <span className="hidden sm:inline">New Chat</span>
+            <span className="sm:hidden">New</span>
           </Button>
         </div>
 
         {/* Messages */}
-        <ScrollArea className="flex-1 p-4">
-          <div className="max-w-4xl mx-auto space-y-6">
+        <ScrollArea className="flex-1 p-2 sm:p-4">
+          <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-3 animate-fade-in ${
+                className={`flex gap-2 sm:gap-3 animate-fade-in ${
                   message.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 {message.role === "assistant" && (
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="h-4 w-4 text-white" />
+                  <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[70%] rounded-2xl px-4 py-3 ${
+                  className={`max-w-[85%] sm:max-w-[70%] rounded-xl sm:rounded-2xl px-3 py-2 sm:px-4 sm:py-3 ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "glass"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{message.content}</p>
+                  <p className="whitespace-pre-wrap text-sm sm:text-base">{message.content}</p>
                   <span className="text-xs opacity-70 mt-1 block">
                     {message.timestamp.toLocaleTimeString()}
                   </span>
                 </div>
                 {message.role === "user" && (
-                  <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-medium">You</span>
+                  <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs sm:text-sm font-medium">You</span>
                   </div>
                 )}
               </div>
@@ -190,31 +191,31 @@ const Chat = () => {
         </ScrollArea>
 
         {/* Input Area */}
-        <div className="p-4 border-t border-border/50 glass">
+        <div className="p-2 sm:p-4 border-t border-border/50 glass">
           <div className="max-w-4xl mx-auto">
-            <div className="flex gap-2">
+            <div className="flex gap-1.5 sm:gap-2">
               <Button
                 variant="outline"
                 size="icon"
-                className="h-12 w-12 rounded-xl flex-shrink-0"
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex-shrink-0 hidden sm:flex"
               >
-                <Mic className="h-5 w-5" />
+                <Mic className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
               <div className="flex-1 glass rounded-xl">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask me anything about products..."
-                  className="h-12 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                  placeholder="Ask me anything..."
+                  className="h-10 sm:h-12 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-sm sm:text-base"
                 />
               </div>
               <Button
                 onClick={handleSendMessage}
                 size="icon"
-                className="h-12 w-12 rounded-xl hover-glow flex-shrink-0"
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl hover-glow flex-shrink-0"
               >
-                <Send className="h-5 w-5" />
+                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </div>
           </div>

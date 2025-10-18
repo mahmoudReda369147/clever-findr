@@ -44,19 +44,19 @@ const Auth = () => {
       </div>
 
       {/* Right Side - Auth Forms */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <Card className="w-full max-w-md glass border-2">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold text-center">Get Started</CardTitle>
-            <CardDescription className="text-center">
+          <CardHeader className="space-y-1 px-4 sm:px-6">
+            <CardTitle className="text-xl sm:text-2xl font-bold text-center">Get Started</CardTitle>
+            <CardDescription className="text-center text-sm sm:text-base">
               Create an account or sign in to continue
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 sm:px-6">
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-6">
+                <TabsTrigger value="signin" className="text-sm sm:text-base">Sign In</TabsTrigger>
+                <TabsTrigger value="signup" className="text-sm sm:text-base">Sign Up</TabsTrigger>
               </TabsList>
 
               {/* Sign In Tab */}
