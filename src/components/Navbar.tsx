@@ -1,15 +1,39 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ShoppingBag, Heart, Bell, Settings, Moon, Sun, User } from "lucide-react";
-import { useState } from "react";
+import { Sparkles, ShoppingBag, Heart, Bell, Settings, Moon, Sun, User, LogOut } from "lucide-react";
+import { useState, useEffect } from "react";
+import { getUserData, removeUserData, isAuthenticated } from "@/lib/auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isDark, setIsDark] = useState(false);
+  const [userData, setUserData] = useState<{name: string; email: string; token: string} | null>(null);
+
+  useEffect(() => {
+    // Check if user is logged in on component mount and state changes
+    const data = getUserData();
+    setUserData(data);
+  }, []);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle("dark");
+  };
+
+  const handleLogout = () => {
+    removeUserData();
+    setUserData(null);
+    navigate("/");
   };
 
   const isActive = (path: string) => location.pathname === path;
@@ -89,12 +113,45 @@ const Navbar = () => {
               </Button>
             </Link>
 
-            <Link to="/auth">
-              <Button variant="default" size="sm" className="hover-glow h-9 sm:h-10">
-                <User className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Sign In</span>
-              </Button>
-            </Link>
+            {userData ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 sm:h-10 sm:w-10 hover-glow">
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-primary text-primary-foreground">
+                        {userData.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      <p className="font-medium">{userData.name}</p>
+                      <p className="text-sm text-muted-foreground">{userData.email}</p>
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <Link to="/settings">
+                    <DropdownMenuItem>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                <Button variant="default" size="sm" className="hover-glow h-9 sm:h-10">
+                  <User className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Sign In</span>
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

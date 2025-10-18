@@ -126,7 +126,7 @@ const Favorites = () => {
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Updated {new Date(product.lastUpdated).toLocaleTimeString()}
+                        Updated {new Date(product.lastUpdated)?.toLocaleTimeString()}
                       </p>
                     </div>
                   </div>
